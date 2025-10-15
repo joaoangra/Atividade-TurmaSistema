@@ -1,64 +1,158 @@
-## Gerenciador de Turmas e Atividades
-Gerenciador de Turmas e Atividades com usuario Professor e Aluno, Professor com certas permissões e Aluno tambem
+# 📚 Sistema de Gerenciamento de Turmas e Atividades
 
-### MerDer
-![MerDer](./docs/DER.drawio.png)
+Um sistema completo para gerenciamento de turmas e atividades escolares, com perfis de Professor e Aluno. Professores podem criar e gerenciar turmas e atividades, enquanto alunos têm acesso limitado.
+
+## 🖼️ Diagramas
+
+### Modelo Entidade-Relacionamento (MER)
+![MER](./docs/der_erd.png)
+
 ### Diagrama de Casos de Uso
-![DCU](./docs/DCU.drawio.png)
+![DCU](./docs/use_case_uml.png)
 
-## Como testar 
-1. Configure o ambiente de desenvolvimento com as seguintes ferramentas.
+## ✨ Funcionalidades
 
-- [VsCode](https://code.visualstudio.com/)
-- [XAMPP](https://www.apachefriends.org/pt_br/index.html)
-- [NodeJS](https://nodejs.org/pt)
+- **Autenticação**: Login para Professores e Alunos
+- **Gerenciamento de Turmas**: Criar, editar e visualizar turmas (apenas Professores)
+- **Gerenciamento de Atividades**: Criar, editar e visualizar atividades por turma (apenas Professores)
+- **Permissões**: Controle de acesso baseado no perfil do usuário
 
-2. Após a instalação das ferramentas siga esse passo para clonar o repositorio e testa-ló.
+## 🛠️ Tecnologias Utilizadas
 
-- Copie o codigo HTTP no GitHub do repositorio que queira testar, abra o Git Bash em sua area de trabalho e coloque o seguinte codígo
+- **Backend**: Node.js, Express.js, Prisma ORM
+- **Banco de Dados**: MySQL
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **Ferramentas**: Prisma CLI, XAMPP
+
+## 📋 Pré-requisitos
+
+Antes de começar, certifique-se de ter instalado em sua máquina:
+
+- [Visual Studio Code](https://code.visualstudio.com/) (ou outro editor de código)
+- [Node.js](https://nodejs.org/pt) (versão 16 ou superior)
+- [XAMPP](https://www.apachefriends.org/pt_br/index.html) (para MySQL)
+- [Git](https://git-scm.com/) (para clonar o repositório)
+
+## 🚀 Instalação e Configuração
+
+Siga os passos abaixo para configurar o ambiente de desenvolvimento:
+
+### 1. Clone o Repositório
+
+Abra o terminal (Git Bash ou CMD) e execute:
 
 ```bash
-git clone <https://url>
+git clone <URL_DO_REPOSITORIO>
+cd <Nome da pasta>
 ```
 
-- Agora com o repositorio clonado, entre nela com o seguinte comando
-
-```bash
-cd <nomedoarquivo>
-```
-
-- Agora dentro do arquivo clonado pelo Git Bash, digite esse comando para abri-lo no VsCode
+### 2. Abra no VS Code
 
 ```bash
 code .
 ```
 
-- Com o arquivo aberto no VsCode, abra o CMD (CRTL+"), e coloque os seguinte comandos na ordem que aparecem logo abaixo
+### 3. Configure o Backend (API)
+
+Abra um novo terminal no VS Code (Ctrl + Shift + `) e navegue para a pasta da API:
 
 ```bash
 cd api
-npm i prisma -g
-npm init -y
-npm i express cors dotenv 
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Instale o Prisma globalmente (se ainda não tiver):
+
+```bash
+-npm i prisma -g
+-npm init -y
+-npm i express cors dotenv 
+-npx prisma init --datasource-provider mysql
+```
+
+### 4. Configure o Banco de Dados
+
+Certifique-se de que o XAMPP está rodando e o MySQL está ativo.
+
+Inicialize o Prisma:
+
+```bash
 npx prisma init --datasource-provider mysql
 ```
 
-- Apos colocar os comandos em ordem no CMD crie um pasta chamada .env (caso os comandos dados ja tenham criado não será necessario)
+Crie ou edite o arquivo `.env` na pasta `api` com a seguinte configuração:
 
-```bash
-DATABASE_URL="mysql://root@localhost:3306/techman?schema=public&timezone=UTC"
+```env
+DATABASE_URL="mysql://root@localhost:3306/sistema_turma?schema=public&timezone=UTC"
 ```
 
-- Faremos a migração do banco de dados para o MySQL através do comando a seguir no terminal
+> **Nota**: Substitua `sistema_turma` pelo nome do banco que você criou no phpMyAdmin do XAMPP.
+
+Execute as migrações do banco:
 
 ```bash
 npx prisma migrate dev --name init
 ```
 
-- Caso seja de interesse, coloque seu email para conectar o Git ao GitHub
+Popule o banco com dados iniciais:
 
 ```bash
-git config --global user.email "seu-email@exemplo.com"
+npx prisma db seed
 ```
 
-#### Desenvolvido por Pedro Duarte
+## ▶️ Como Executar
+
+### 1. Inicie a API
+
+Na pasta `api`, execute:
+
+```bash
+npm start
+```
+
+Você verá a mensagem: `API respondendo em http://localhost:3005`
+
+### 2. Abra a Interface Web
+
+Abra o arquivo `web/login/index.html` diretamente no navegador (duplo clique ou arraste para o navegador).
+
+> **Dica**: Para uma experiência melhor, use uma extensão como "Live Server" no VS Code para servir a pasta `web` em um servidor local.
+
+### 3. Faça Login
+
+Use as credenciais de exemplo:
+- **Professor**: Email e senha conforme os dados seedados
+- **Aluno**: Email e senha conforme os dados seedados
+
+## 📖 Como Usar
+
+1. **Login**: Entre com seu email e senha na tela de login.
+2. **Turmas**: Visualize a lista de turmas. Professores podem criar novas turmas.
+3. **Atividades**: Clique em uma turma para ver suas atividades. Professores podem adicionar novas atividades.
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Siga estes passos:
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença ISC. Veja o arquivo `LICENSE` para mais detalhes.
+
+## 👨‍💻 Desenvolvido por
+
+João Angra
+
+---
+
+**Dúvidas?** Abra uma issue no repositório ou entre em contato com o desenvolvedor.

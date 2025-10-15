@@ -38,7 +38,7 @@ function criarBotaoLogout() {
 // Carregar turmas da API e montar a lista
 async function carregarTurmas(usuario) {
   try {
-    const response = await fetch("http://localhost:3000/turma");
+    const response = await fetch("http://localhost:3005/turma");
     if (!response.ok) throw new Error("Erro ao buscar turmas");
     const turmas = await response.json();
 
@@ -108,14 +108,14 @@ function configurarModais(usuario) {
       let res;
       if (id) {
         // Atualizar
-        res = await fetch(`http://localhost:3000/turma/${id}`, {
+        res = await fetch(`http://localhost:3005/turma/${id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nome }),
         });
       } else {
         // Criar
-        res = await fetch("http://localhost:3000/turma", {
+        res = await fetch("http://localhost:3005/turma", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nome }),
@@ -168,7 +168,7 @@ function configurarModais(usuario) {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/atividade", {
+      const res = await fetch("http://localhost:3005/atividade", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -220,7 +220,7 @@ async function excluirTurma(id) {
   if (!confirm("Deseja realmente excluir esta turma?")) return;
 
   try {
-    const res = await fetch(`http://localhost:3000/turma/${id}`, {
+    const res = await fetch(`http://localhost:3005/turma/${id}`, {
       method: "DELETE",
     });
     if (!res.ok) throw new Error("Erro ao excluir turma");
@@ -240,7 +240,7 @@ async function visualizarAtividades(turmaId, nomeTurma) {
   document.getElementById("atividades-section").style.display = "block";
 
   try {
-    const res = await fetch("http://localhost:3000/atividade");
+    const res = await fetch("http://localhost:3005/atividade");
     if (!res.ok) throw new Error("Erro ao buscar atividades");
     const atividades = await res.json();
 
@@ -289,57 +289,7 @@ function abrirModalCriarTurma() {
 // Associa o botão "Nova Turma" para abrir o modal ao carregar a página
 document.getElementById("btnCadastrarTurma").onclick = abrirModalCriarTurma;
 
-// Configuração do submit do form para criação/atualização da turma
-const formTurma = document.getElementById("formTurma");
-formTurma.onsubmit = async (e) => {
-  e.preventDefault();
 
-  const usuario = JSON.parse(sessionStorage.getItem("usuario"));
-  if (!usuario || usuario.perfilId !== 2) {
-    alert("Você não tem permissão para realizar essa ação.");
-    return;
-  }
-
-  const id = formTurma.dataset.id;  // Se existir, é edição; se não, criação
-  const nome = formTurma.nomeTurma.value.trim();
-
-  if (!nome) {
-    alert("Digite o nome da turma");
-    return;
-  }
-
-  try {
-    let res;
-    if (id) {
-      // Atualizar turma
-      res = await fetch(`http://localhost:3000/turma/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome }),
-      });
-    } else {
-      // Criar turma
-      res = await fetch("http://localhost:3000/turma", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome }),
-      });
-    }
-
-    if (!res.ok) throw new Error("Erro ao salvar turma");
-
-    // Fecha modal e limpa formulário após sucesso
-    const modalTurma = document.getElementById("modalTurma");
-    modalTurma.style.display = "none";
-    formTurma.reset();
-    delete formTurma.dataset.id;
-
-    // Recarrega lista de turmas
-    carregarTurmas(usuario);
-  } catch (err) {
-    alert(err.message);
-  }
-};
 
 
 // Modal atualizar atividade - semelhante ao modal turma
@@ -364,7 +314,7 @@ async function excluirAtividade(id, turmaId) {
   if (!confirm("Deseja realmente excluir esta atividade?")) return;
 
   try {
-    const res = await fetch(`http://localhost:3000/atividade/${id}`, {
+    const res = await fetch(`http://localhost:3005/atividade/${id}`, {
       method: "DELETE",
     });
     if (!res.ok) throw new Error("Erro ao excluir atividade");

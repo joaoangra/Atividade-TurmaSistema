@@ -6,8 +6,8 @@ Gerenciador de Turmas e Atividades com usuario Professor e Aluno, Professor com 
 
 ### MerDer
 
-![MerDer](./DER.drawio.png)
+![MerDer](./der_erd.png)
 
 ### Diagrama de Casos de Uso
 
-![DCU](./DCU.drawio.png)
+![DCU](./use_case_uml.png)
