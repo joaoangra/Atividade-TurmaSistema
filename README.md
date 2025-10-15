@@ -129,6 +129,14 @@ Use as credenciais de exemplo:
 - **Professor**: Email e senha conforme os dados seedados
 - **Aluno**: Email e senha conforme os dados seedados
 
+# Usuarios cadastrados
+
+``1;joao.aluno@email.com;123456;1
+2;aline.prof@email.com;654321;2
+3;rebeca.prof@email.com;789012;2
+4;thamye.aluno@email.com;345678;1
+``
+
 ## 📖 Como Usar
 
 1. **Login**: Entre com seu email e senha na tela de login.
