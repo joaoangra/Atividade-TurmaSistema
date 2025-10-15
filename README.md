@@ -77,7 +77,7 @@ Instale o Prisma globalmente (se ainda não tiver):
 
 ### 4. Configure o Banco de Dados
 
-Certifique-se de que o XAMPP está rodando e o MySQL está ativo.
+Certifique-se de que o XAMPP está rodando e o MySQL, e o APACHE está ativo.
 
 Inicialize o Prisma:
 
